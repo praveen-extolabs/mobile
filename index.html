@@ -33,11 +33,13 @@
         </div>
         <script type="text/javascript" src="cordova-2.2.0.js"></script>
          <script type="text/javascript" charset="utf-8">
+			var sval = "";
 			document.addEventListener("deviceready", onDeviceReady, false);
 			function onDeviceReady() {
 				// find all contacts with 'Bob' in any name field
 				var options = new ContactFindOptions();
-				options.filter="Bob"; 
+				options.filter=sval; 
+				options.multiple: true; 
 				var fields = ["displayName", "name"];
 				navigator.contacts.find(fields, onSuccess, onError, options);
 				$('.app').append("<div>Device Name = "+window.device.name+"</div>");
@@ -57,6 +59,7 @@
 			}
 			
 		 </script>
-		 <input type="button" onclick="onDeviceReady()" value="recheck" />
+		 <input type="text" id="ss" value="" />
+		 <input type="button" onclick="sval=$('#ss').val();onDeviceReady()" value="recheck" />
     </body>
 </html>
