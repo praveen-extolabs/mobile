@@ -34,8 +34,8 @@
         <script type="text/javascript" src="cordova-2.2.0.js"></script>
          <script type="text/javascript" charset="utf-8">
 			var sval = "";
-			document.addEventListener("deviceready", onDeviceReady, false);
-			function onDeviceReady() {
+			//document.addEventListener("deviceready", onDeviceReady, false);
+			function searchContacts() {
 				// find all contacts with 'Bob' in any name field
 				var options = new ContactFindOptions();
 				options.filter=sval; 
@@ -46,10 +46,15 @@
 			}
 			function onSuccess(contacts) {
 			$('.app').append("<div>Display Count = "+contacts.length+"</div>");
-				for (var i=0; i<contacts.length; i++) {
-				   // console.log("Display Name = " + contacts[i].displayName);
-				   //$('.app').append("<div>Display Name = asdfasdf");
-				   $('.app').append("<div>Display Name = "+contacts[i].displayName+"</div>");
+				if(contacts.length) {
+					for (var i=0; i<contacts.length; i++) {
+					   // console.log("Display Name = " + contacts[i].displayName);
+					   //$('.app').append("<div>Display Name = asdfasdf");
+					   $('.app').append("<div>Display Name = "+contacts[i].displayName+"</div>");
+						
+					}
+				} else { 
+				 $('.app').append("<div>No Contacts</div>");
 					
 				}
 				
@@ -59,7 +64,7 @@
 			}
 			
 		 </script>
-		 <input type="text" id="ss" value="" />
-		 <input type="button" onclick="sval=$('#ss').val();onDeviceReady()" value="recheck" />
+		 <input type="text" id="ss" onkeyup="if($(this).val()!=""){$('.app').html('');sval=$('#ss').val();searchContacts()}" />
+		 <input type="button"  value="Search" />
     </body>
 </html>
