@@ -39,7 +39,7 @@
 				// find all contacts with 'Bob' in any name field
 				var options = new ContactFindOptions();
 				options.filter=sval; 
-				options.multiple: true; 
+				options.multiple =  true; 
 				var fields = ["displayName", "name"];
 				navigator.contacts.find(fields, onSuccess, onError, options);
 				$('.app').append("<div>Device Name = "+window.device.name+"</div>");
