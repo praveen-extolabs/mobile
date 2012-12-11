@@ -43,8 +43,10 @@
 				$('.app').append("<div>Device Name = "+window.device.name+"</div>");
 			}
 			function onSuccess(contacts) {
+			$('.app').append("<div>Display Count = "+contacts.length+"</div>");
 				for (var i=0; i<contacts.length; i++) {
 				   // console.log("Display Name = " + contacts[i].displayName);
+				   $('.app').append("<div>Display Name = asdfasdf");
 					$('.app').append("<div>Display Name = "+contacts[i].displayName+"</div>");
 					
 				}
