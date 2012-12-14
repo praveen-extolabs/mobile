@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+        </title>
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.min.css"
+        />
+        <link rel="stylesheet" href="my.css" />
+        <style>
+            /* App custom styles */
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.min.js">
+		
+        </script>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+		<script src="resources/js/raphael.2.1.0.min.js"></script>
+		<script src="resources/js/justgage.1.0.1.min.js"></script>
+		<script src="resources/js/gauge.min.js"></script>
+        <script src="my.js">
+        </script>
+		
+		<script>
+              //App custom javascript
+			  var g1;
+      
+			  window.onload = function(){
+				  var g1 = new JustGage({
+					  id: "g1", 
+					  value: getRandomInt(350, 980), 
+					  min: 350,
+					  max: 980,
+					  title: "Novotel",
+					  label: "visits"
+					});
+					
+					var opts = {
+						  lines: 12, // The number of lines to draw
+						  angle: 0.15, // The length of each line
+						  lineWidth: 0.44, // The line thickness
+						  pointer: {
+							length: 0.9, // The radius of the inner circle
+							strokeWidth: 0.035, // The rotation offset
+							color: '#000000' // Fill color
+						  },
+						  colorStart: '#6FADCF',   // Colors
+						  colorStop: '#8FC0DA',    // just experiment with them
+						  strokeColor: '#E0E0E0',   // to see which ones work best for you
+						  generateGradient: true
+						};
+						var target = document.getElementById('canvas-preview'); // your canvas element
+						var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+						gauge.maxValue = 3000; // set max gauge value
+						gauge.animationSpeed = 32; // set animation speed (32 is default value)
+						gauge.set(1250); // set actual value
+						gauge.setTextField(document.getElementById("preview-textfield"));
+				
+				};
+				
+				
+			   function initialize_old() {
+			   
+					var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+					var mapOptions = {
+					  zoom: 4,
+					  center: myLatlng,
+					  mapTypeId: google.maps.MapTypeId.ROADMAP
+					}
+
+					var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
+					var contentString = 'Taj Krishna';
+
+					var infowindow = new google.maps.InfoWindow({
+						content: contentString
+					});
+
+					var marker = new google.maps.Marker({
+						position: myLatlng,
+						map: map,
+						title: 'Uluru (Ayers Rock)'
+					});
+					google.maps.event.addListener(marker, 'click', function() {
+					  infowindow.open(map,marker);
+					});
+					
+				}
+				
+				  var geocoder;
+				  var map;
+				  
+				
+				function codeAddress(address,divContainer) {
+					  
+					  geocoder = new google.maps.Geocoder();
+					  console.log(address);
+					  geocoder.geocode( { 'address': address}, function(results, status) {
+					  if (status == google.maps.GeocoderStatus.OK) {
+						  var mapOptions = {
+						  zoom: 16,
+						  center: results[0].geometry.location,
+						  mapTypeId: google.maps.MapTypeId.ROADMAP
+						}
+						map = new google.maps.Map(document.getElementById(divContainer), mapOptions);
+						var marker = new google.maps.Marker({
+							map: map,
+							position: results[0].geometry.location
+						});
+					  } else {
+						alert('Geocode was not successful for the following reason: ' + status);
+					  }
+					});
+				  }
+        </script>
+    </head>
+    <style>
+		html, body {
+  height: 100% !important;
+  margin: 0;
+  padding: 0;
+}
+
+#map_canvas {
+  width:800px; height:600px;
+  display: inline-block;
+        margin: 1em;
+}
+
+.map_canvas {
+  width:800px; height:600px;
+  display: inline-block;
+        margin: 1em;
+}
+
+@media print {
+  html, body {
+    height: auto;
+  }
+
+  #map_canvas {
+    height: 650px;
+  }
+}
+#g1 {
+        width:200px; height:160px;
+        display: inline-block;
+        margin: 1em;
+      }
+	  #preview {
+  background: #f9f9f9; position: relative;
+  color: #fff;
+  float: left;
+  width: 220px;
+  height: 220px;
+  margin: 0 20px 20px 0;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  clear: both;
+}
+#canvas-preview{
+  width: 220px; top: 70px;
+  position: relative;
+}
+#preview-textfield{
+  position: absolute; top: 35px; left: 0; right: 0;
+  text-align: center; font-size: 2em; font-weight: bold;
+  color: black; font-family: 'Amaranth', sans-serif;
+}
+	</style>
+	
+    <body>
+        <!-- Home -->
+        <div data-role="page" id="page1">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    Restaurants
+                </h3>
+            </div>
+            <div data-role="content">
+                <ul data-role="listview" data-divider-theme="b" data-inset="true">
+                </ul>
+                <div data-role="collapsible-set" data-theme="a" data-content-theme="a">
+                    <div data-role="collapsible">
+                        <h3>
+                            Taj Krishna
+                        </h3>
+                        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+                            <li data-theme="c">
+                                <a href="#page3" data-transition="slide" onclick="codeAddress('Taj Krishna,Hyderabad,India','tajkrishna_canvas');">
+                                    Map
+                                </a>
+                            </li>
+                            <li data-theme="c">
+                                <a href="#page2" data-transition="slide" >
+                                    Contacts
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h3>
+                            Taj Banjara
+                        </h3>
+                        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+                            <li data-theme="c">
+                                <a href="#page5" data-transition="slide" onclick="codeAddress('Taj Banjara,Banjara Hills,Hyderabad,India','tajbanjara_canvas');">
+                                    Map
+                                </a>
+                            </li>
+                            <li data-theme="c">
+                                <a href="#page2" data-transition="slide">
+                                    Contacts
+                                </a>
+                            </li>
+                        </ul>
+                        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+						
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h3>
+                            Novotel
+                        </h3>
+                        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+                            <li data-theme="c">
+                                <a href="#page6" data-transition="slide" onclick="codeAddress('Novotel,Hyderabad,India','novotel_canvas');">
+                                    Map
+                                </a>
+                            </li>
+                            <li data-theme="c">
+                                <a href="#page2" data-transition="slide">
+                                    Contacts
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contacts -->
+        <div data-role="page" id="page2">
+            <div data-theme="a" data-role="header">
+                <a data-role="button" href="#page1" class="ui-btn-right">
+                    Home
+                </a>
+                <a data-role="button" data-rel="back" data-theme="a" href="#page2" class="ui-btn-left">
+                    Back
+                </a>
+                <h3>
+                    Contacts
+                </h3>
+            </div>
+            <div data-role="content">
+                <ul data-role="listview" data-divider-theme="a" data-inset="true">
+                    <li data-theme="c">
+                        <a href="#page7" data-transition="slide" >
+                            Roger Moore
+                            <span class="ui-li-count">
+                                7
+                            </span>
+                        </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#page7" data-transition="slide">
+                            Timothy Dalthan
+                            <span class="ui-li-count">
+                                1
+                            </span>
+                        </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#page7" data-transition="slide">
+                            Daniel Craig
+                            <span class="ui-li-count">
+                                3
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Map - Taj Krishna -->
+        <div data-role="page" id="page3">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    Taj Krishna Map
+                </h3>
+                <a data-role="button" href="#page1" class="ui-btn-right">
+                    Home
+                </a>
+                <a data-role="button" data-rel="back" href="#page3" class="ui-btn-left">
+                    Back
+                </a>
+            </div>
+            <div data-role="content">
+			<div id="tajkrishna_canvas" class="map_canvas"></div>
+            </div>
+        </div>
+        <!-- Map - Taj Banjara -->
+        <div data-role="page" id="page5">
+            <div data-theme="a" data-role="header">
+                <a data-role="button" href="#page1" class="ui-btn-right">
+                    Home
+                </a>
+                <h3>
+                    Taj Banjara Map
+                </h3>
+                <a data-role="button" data-rel="back" href="#page5" class="ui-btn-left">
+                    Back
+                </a>
+            </div>
+            <div data-role="content">
+			<div id="tajbanjara_canvas" class="map_canvas"></div>
+            </div>
+        </div>
+        <!-- Map - Novotel -->
+        <div data-role="page" id="page6">
+            <div data-theme="a" data-role="header">
+                <a data-role="button" href="#page1" class="ui-btn-right">
+                    Home
+                </a>
+                <a data-role="button" data-rel="back" href="#page6" class="ui-btn-left">
+                    Back
+                </a>
+                <h3>
+                    Novotel Map
+                </h3>
+            </div>
+            <div data-role="content">
+			<div id="novotel_canvas" class="map_canvas"></div>
+            </div>
+        </div>
+        <!-- Visits -->
+        <div data-role="page" id="page7">
+            <div data-theme="a" data-role="header">
+                <a data-role="button" data-rel="back" href="#page7" class="ui-btn-left">
+                    Back
+                </a>
+                <h3>
+                    Visits
+                </h3>
+                <a data-role="button" href="#page1" class="ui-btn-right">
+                    Home
+                </a>
+            </div>
+            <div data-role="content">
+			<div id="g1"></div>
+			<div id="preview">
+				<canvas id="canvas-preview"></canvas>
+				<div id="preview-textfield"></div>
+			</div>
+            </div>
+        </div>
+        <script>
+              //App custom javascript
+        </script>
+    </body>
+
+</html>
