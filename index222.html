@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="css/jquery.mobile-1.2.0.min.css"/>
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.2.0.min.js"></script>
+    <script type="text/javascript" src="js/autocomplete.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
+
+</head>
+
+<body>
+
+<style type="text/css">
+    #logo {
+        width: 208px;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+
+</style>
+
+<!-- Home -->
+<div data-role="page" id="search">
+    <div id="logo">
+        <img src="images/makaan-logo.jpg"/>
+    </div>
+    <div id="search-box" data-theme="c">
+        <input type="search" name="search" id="city" placeholder="Enter a City. eg Hyderabad" data-native-menu="false"/>
+    </div>
+    <div data-role="content">
+        <div id="morePage" style="display:none">
+            <div data-role="fieldcontain">
+                <select name="propertyType" id="property-type-select" data-native-menu="false">
+                    <option>Residential Property</option>
+                    <option value="standard">Apartment</option>
+                    <option value="rush">Independent house</option>
+                    <option value="express">Plot/Land</option>
+                    <option value="overnight">Overnight</option>
+                </select>
+            </div>
+
+            <div data-role="fieldcontain">
+                <select name="bedrooms" id="bedroom-type-select" data-native-menu="false">
+                    <option>Bedrooms</option>
+                    <option value="standard">1 BHK</option>
+                    <option value="rush">2 BHK</option>
+                    <option value="express">3 BHK</option>
+                    <option value="overnight">4 BHK</option>
+                </select>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="slider-fill">Rs. Min(Lacs)</label>
+                <input type="range" name="min-val" id="slider-fill" value="5" min="0" step="2" max="100"
+                       data-highlight="true"/>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="slider-fill">Rs. Max:(Lacs)</label>
+                <input type="range" name="max-val" id="slider-fill" value="30" min="0" max="150" step="2"
+                       data-highlight="true"/>
+            </div>
+            <input value="Search" type="submit" data-inline="true">
+        </div>
+    </div>
+</div>
+
+<div data-role="page" id="page2">
+    <div data-role="content">
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            <li data-role="list-divider" role="heading">
+                Divider
+            </li>
+            <li data-theme="c">
+                <a href="#" data-transition="slide">
+                    Button
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+
+</html>
