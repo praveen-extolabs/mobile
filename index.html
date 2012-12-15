@@ -1,72 +1,461 @@
-<!DOCTYPE HTML> 
+<!DOCTYPE html>
 <html>
+
 <head>
-<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'/> 
-<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.min.css"
-        />
-        <link rel="stylesheet" href="css/swipe.css" />
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.min.js">
-        </script>
-		<script src='js/swipe.min.js'></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta id="extViewportMeta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />	
+    <title>Makaan.com</title>
+    <link rel="stylesheet" href="css/jquery.mobile-1.2.0.min.css"/>
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.2.0.min.js"></script>
+    <script type="text/javascript" src="js/autocomplete.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
 
+	<script type="text/javascript" src="js/list.js"></script>
+	<script type="text/javascript" src="js/global.js"></script>
+	<link rel="stylesheet" href="css/swipe.css" />
+	<script type="text/javascript" src='js/swipe.min.js'></script>
+<link rel="stylesheet" href="css/main.css?v=31" />
+
+<script>
+//createCookie('isLoggedIn',false);
+$(function(){
+    $.mobile.changePage( '#login', { transition: 'slide'} );
+});	
+</script>
 </head>
-<body>
+
+<body data-theme="d">
+
+<style type="text/css">
+    #logo {
+        width: 208px;
+        margin: auto;
+        margin-bottom: 20px;
+		margin-top:40px;
+    }
+
+    #cities .ui-corner-top, #cities .ui-corner-bottom {
+        -moz-border-radius: 0px;
+        -webkit-border-radius: 0px;
+        border-radius: 0px;
+        -moz-border-radius: 0px;
+        -webkit-border-radius: 0px;
+        border-radius: 0px;
+    }
+
+    #cities .ui-icon-arrow-r {
+        display: none;;
+    }
+
+    #cities .ui-btn-up-c {
+        background-image: none !important;
+    }
+
+    #index-search-filters .ui-select {
+        width: 100% !important;;
+    }
+
+    #index-search-filters .ui-field-contain {
+        margin: 1em 0em;
+    }
+
+    .slider .ui-btn-corner-all {
+        -moz-border-radius: 1em !important;
+        -webkit-border-radius: 1em !important;
+        border-radius: 1em !important;
+    }
+
+    .slider .ui-slider {
+        width: 100% !important;
+    }
+
+    .slider div.ui-slider {
+        margin: 0;
+    }
+
+    .search-button .ui-btn.ui-submit{
+        width: 100% !important;
+    }
+
+    #search-box .ui-btn{
+        padding: 0px !important;
+    }
+
+    #search-box input.ui-input-text{
+        width:97%;
+        margin: auto;
+    }
+
+    #search-box{
+        width: 96%;
+        margin: auto;
+    }
+
+    .popover {
+        position: absolute;
+        top1: 0;
+        left1: 0;
+        z-index: 1010;
+        display1: none;
+        width: 236px;
+        padding: 1px;
+        text-align: left;
+        white-space: normal;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+        -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        -webkit-background-clip: padding-box;
+        -moz-background-clip: padding;
+        background-clip: padding-box;
+    }
+
+    .popover.top {
+        margin-top: -10px;
+    }
+
+    .popover.right {
+        margin-left: 10px;
+    }
+
+    .popover.bottom {
+        margin-top: 10px;
+    }
+
+    .popover.left {
+        margin-left: -10px;
+    }
+
+    .popover-title {
+        padding: 8px 14px;
+        margin: 0;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 18px;
+        background-color: #f7f7f7;
+        border-bottom: 1px solid #ebebeb;
+        -webkit-border-radius: 5px 5px 0 0;
+        -moz-border-radius: 5px 5px 0 0;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .popover-content {
+        padding: 9px 14px;
+    }
+
+    .popover .arrow,
+    .popover .arrow:after {
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+    }
+
+    .popover .arrow {
+        border-width: 11px;
+    }
+
+    .popover .arrow:after {
+        border-width: 10px;
+        content: "";
+    }
+
+    .popover.top .arrow {
+        bottom: -11px;
+        left: 50%;
+        margin-left: -11px;
+        border-top-color: #999;
+        border-top-color: rgba(0, 0, 0, 0.25);
+        border-bottom-width: 0;
+    }
+
+    .popover.top .arrow:after {
+        bottom: 1px;
+        margin-left: -10px;
+        border-top-color: #ffffff;
+        border-bottom-width: 0;
+    }
+
+    .popover.right .arrow {
+        top: 50%;
+        left: -11px;
+        margin-top: -11px;
+        border-right-color: #999;
+        border-right-color: rgba(0, 0, 0, 0.25);
+        border-left-width: 0;
+    }
+
+    .popover.right .arrow:after {
+        bottom: -10px;
+        left: 1px;
+        border-right-color: #ffffff;
+        border-left-width: 0;
+    }
+
+    .popover.bottom .arrow {
+        top: -11px;
+        left: 50%;
+        margin-left: -11px;
+        border-bottom-color: #999;
+        border-bottom-color: rgba(0, 0, 0, 0.25);
+        border-top-width: 0;
+    }
+
+    .popover.bottom .arrow:after {
+        top: 1px;
+        margin-left: -10px;
+        border-bottom-color: #ffffff;
+        border-top-width: 0;
+    }
+
+    .popover.left .arrow {
+        top: 50%;
+        right: -11px;
+        margin-top: -11px;
+        border-left-color: #999;
+        border-left-color: rgba(0, 0, 0, 0.25);
+        border-right-width: 0;
+    }
+
+    .popover.left .arrow:after {
+        right: 1px;
+        bottom: -10px;
+        border-left-color: #ffffff;
+        border-right-width: 0;
+    }
+
+</style>
+
+<div id="menu">
+    <h2>Refine Search</h2>
+
+    <h3>Localities</h3>
+    <ul class="localities">
+        <li><a href="#All" class="contentLink">All </a></li>
+        <li><a href="#Gachibowli" class="contentLink">Gachibowli </a></li>
+        <li><a href="#home" class="contentLink">Beeramguda </a></li>
+        <li><a href="#home" class="contentLink">Manikonda </a></li>
+        <li><a href="#home" class="contentLink">Miyapur </a></li>
+    </ul>
+	
+    <h3> Age of Construction</h3>
+
+    <h3>Posted By </h3>
+
+    <h3> Amenities </h3>
+</div>
+
+<div id="rightmenu">
+    <h2>Filter</h2>
+    <ul>
+        <li><a href="#home" class="contentLink">Photos First </a></li>
+        <li><a href="#home" class="contentLink">Freshness: Newest to Oldest </a></li>
+        <li><a href="#home" class="contentLink">Value: High to Low </a></li>
+        <li><a href="#home" class="contentLink">Value: Low to High </a></li>
+    </ul>
+</div>
+<!-- Home -->
+<!--
+
+-->
+<div data-role="page" id="search">
+    <div id="logo">
+        <img src="images/makaan-logo.jpg"/>
+    </div>
+    <div id="search-box">
+        <input type="search" name="search" id="city" placeholder="Enter a City. eg Hyderabad" data-native-menu="false"/>
+        <div class="popover bottom help-search">
+            <div class="arrow"></div>
+            <h3 class="popover-title">Helping hand..</h3>
+            <div class="popover-content">
+                <p>Tap on the text box above to start searching, 10 properties are posted every minute in your area!</p>
+            </div>
+        </div>
+    </div>
+    <ul id="cities" data-role="listview" data-inset="true"></ul>
+
+    <div id="index-search-filters" style="display:none" data-role="content">
+        <div data-role="fieldcontain">
+            <select name="propertyType" id="property-type-select" data-native-menu="false">
+                <option value="1">Residential Property</option>
+                <option value="2">Apartment</option>
+                <option value="3">Independent house</option>
+                <option value="4">Plot/Land</option>
+                <option value="5">Overnight</option>
+            </select>
+        </div>
+        <div data-role="fieldcontain">
+            <select name="bedrooms" id="bedroom-type-select" data-native-menu="false">
+                <option>Bedrooms</option>
+                <option value="1">1 BHK</option>
+                <option value="2">2 BHK</option>
+                <option value="3">3 BHK</option>
+                <option value="4">4 BHK</option>
+            </select>
+        </div>
+
+        <div data-role="fieldcontain" class="budget">
+            <label>Budget: <span class="budget-min">5</span><span> Lakhs - </span><span class="budget-max">30 </span>
+                Lakhs</label>
+        </div>
+        <div data-role="fieldcontain" class="slider slider-min">
+            <input type="range" name="min-val" value="5" min="0" step="2" max="100"
+                   data-highlight="true" style="display: none"/>
+        </div>
+        <div data-role="fieldcontain" class="slider slider-max">
+            <input type="range" name="max-val" value="30" min="0" max="150" step="2"
+                   data-highlight="true" style="display: none"/>
+        </div>
+        <div data-role="fieldcontain" class="search-button">
+            <input id="searchSubmit" value="Search" type="submit" data-inline="true">
+        </div>
+    </div>
 
 
+</div>
+
+
+<div data-role="page" class="pages" id="list">
+	<div data-role="header" data-theme="c">
+	<a href="#"class="showMenu" data-role="button" data-icon="search" data-iconpos="notext" data-theme="c" data-inline="true">Refine Search</a>
+	
+		<div data-role="fieldcontain">
+		
+	         <input type="search" placeholder="Search" name="search-3" id="search-3" value="" data-theme="c" />
+			
+			</div>
+			
+			<a href="#" class="showMenuFilter" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="c" data-inline="true">Filter</a>
+	
+	</div><!-- /header -->
+	
+	
+	<div data-role="content">
+		<div class="content-primary">
+        <div class="popover right help-leftmenu">
+            <div class="arrow"></div>
+            <h3 class="popover-title">Helping hand..</h3>
+            <div class="popover-content">
+                <p>Select mutiple criteria and then swipe right to refresh the list</p>
+            </div>
+        </div>
+		
+		<ul id="listData" data-role="listview" class="ui-listview" >
+			<!--<li><a href="javascript:void(0);"><img src="css/images/thumb2.jpg" /><h3 class="title">Broken Bells</h3><p>Broken Bells</p></a></li>
+			<li><a href="javascript:void(0);"><img src="css/images/thumb2.jpg" /><h3 class="title">Broken Bells</h3><p>Broken Bells</p></a></li>
+			<li><a href="javascript:void(0);"><img src="css/images/thumb2.jpg" /><h3 class="title">Broken Bells</h3><p>Broken Bells</p></a></li>
+			 <li><a href="detail.html">
+			<div class="photo">
+			 <div class="img-thumb">
+				<img src="css/images/thumb1.jpg" />
+			 </div>
+			 </div>
+				<h3 class="title">Independent House/Villa for Sale in Manikonda, Hyderabad Alkapuri Town Ship</h3>
+				<p> Rs. 85,00,000 ( Negotiable )</p>
+				<div class="amenites"><div><div title="Power Backup" alt="Power Backup" style="background: transparent url(http://img.makaan.com/images/searchresult/amenities12.png); float:left;background-position: 0px 0px; width:16px; height:18px;margin-top:2px;"></div><div title="Rain Water Harvesting" alt="Rain Water Harvesting" style="background: transparent url(http://img.makaan.com/images/searchresult/amenities12.png); float:left;background-position: 0px -182px; width:17px; height:15px;margin-left:12px;margin-top:5px;"></div><div title="Club" alt="Club" style="background: transparent url(http://img.makaan.com/images/searchresult/amenities12.png); float:left;background-position: 0px -19px;width:18px; height:18px;margin-left:12px;margin-top:5px;*margin-top:3px;"></div><div title="Swimming Pool" alt="Swimming Pool" style="background: transparent url(http://img.makaan.com/images/searchresult/amenities12.png); float:left;background-position: 0px -37px;width:18px; height:16px;margin-left:12px;margin-top:5px;"></div><div title="Security" alt="Security" style="background: transparent url(http://img.makaan.com/images/searchresult/amenities12.png); float:left;background-position: 0px -91px; width:18px; height:20px;margin-left:12px;margin-top:4px;*margin-top:1px;"></div><div title="Reserved Parking" alt="Reserved Parking" style="background: transparent url(http://img.makaan.com/images/searchresult/amenities12.png); float:left;background-position: 0px -73px;width:16px; height:16px;margin-left:12px;margin-top:5px;"></div><div title="Servant Quarters" alt="Servant Quarters" style="background: transparent url(http://img.makaan.com/images/searchresult/amenities12.png); float:left;background-position: 0px -163px; width:16px; height:19px;margin-left:12px;margin-top:4px;*margin-top:2px;"></div><div title="Park" alt="Park" style="background: transparent url(http://img.makaan.com/images/searchresult/amenities12.png); float:left;background-position: 0px -145px;width:16px; height:19px;margin-left:12px;margin-top:3px;*margin-top:2px;"></div></div></div>
+			
+
+			<span class="price"> &#x20B9; 8000000</span>
+			</a>
+				
+			</li>
+			<li><a href="detail.html">
+			<div class="photo">
+			 <div class="img-thumb">
+				<img src="css/images/thumb2.jpg" />
+				</div>
+				</div>
+				<h3 class="title">Broken Bells</h3>
+				<p>Broken Bells</p>
+					<span class="price"> &#x20B9; 10000000</span>
+			</a></li> -->
+		</ul>
+		</div><!--/content-primary -->	
+	</div><!-- /content -->
+</div><!-- /page -->
+
+
+<div data-role="page" class="pages" id="detail">
 
 <div id='gallery'>
 
-  <div id='slider' style="position:relative;">
+
+  <div id='slider' class="page1" style="position:relative;">
     <ul style="margin:0px;padding:0px;">
+
       <li style='display:block'>
           <div style="width:100%;height:200px;">
-              <img src="pics/1.jpg" style="max-width:100%;min-height:100%;display:block;margin-left:auto;margin-right:auto;" />
+              <img id='pageImage1' src="pics/1.jpg" style="max-width:100%;height:100%;display:block;margin-left:auto;margin-right:auto;" />
           </div>
       </li>
-      <li style='display:none'>http://placehold.it/480x250.png
+      <li style='display:none'>
 		<div style="width:100%;height:200px;">
-			<img src="pics/2.jpg" style="max-width:100%;min-height:100%;display:block;margin-left:auto;margin-right:auto;" />
+			<img id='pageImage2' src="pics/2.jpg" style="max-width:100%;height:100%;display:block;margin-left:auto;margin-right:auto;" />
 		</div>
 	  </li>
       <li style='display:none'>
 		<div style="width:100%;height:200px;text-align:center;"> 
-			<img src="pics/3.jpg" style="max-width:100%;min-height:100%;display:block;margin-left:auto;margin-right:auto;" />
+			<img id='pageImage3' src="pics/3.jpg" style="max-width:100%;height:100%;display:block;margin-left:auto;margin-right:auto;" />
 		</div>
 	  </li>
     </ul>
+	  <!--<span class="marker"><img class="triggerMap" src="property_images/marker.png" /></span>-->
       <span id='position' style="top:188px;"><em class='on'>&bull;</em><em>&bull;</em><em>&bull;</em></span>
+  </div>
+   <div id="mapContainer" class="page2" style="width:100%;height:250px;">
+	  <iframe src="" style="width:100%;height:100%;border:none !important;"></iframe>	
+	  <!--<span class="marker"><img class="triggerMap" src="property_images/marker.png" /></span>-->
   </div>
 </div>
 
 
-<p class='about'>Swipe is a lightweight mobile slider with 1:1 touch movement, resistant bounds, scroll prevention, and completely library agnostic.</p>
+<p class='about' id='pageMain' ></p>
 
 <ul id='tabSelector' class='base-tabs'>
-  <li class='on'>Description</li>
-  <li>Amenities</li>
+  <li class='on'>Details</li>
+  <li>Description</li>
   <li>Contact</li>
+  <li>Map</li>
 </ul>
 
 <div id='tabs'>
-  <ul>
+  <ul style="padding:0px">
     <li style='display:block'>
-         <div>
-             Description
+         <div id='pageMore'>
+             
          </div>
     </li>
     <li style='display:none'>
-        <div>Amenities</div>
+        <div id='pageDesc'></div>
 
     </li>
 
     <li style='display:none'>
-        <div>
-            Contact
+        <div id="pageContact">
+            
+			
         </div>
 
-    </li>    
+    </li>
+    
+	<li style='display:none'>
+        <div id="pageMap">
+            
+			<!--<iframe src="" style="width:100%;height:100%;border:none !important;"></iframe>-->
+        </div>
+
+    </li>
 
   </ul>
 </div>
@@ -150,13 +539,79 @@ function setTab(elem) {
       }, false );
     }
   }
+  
+  
 
 })();
 
+		
+$('.triggerMap').unbind('click').bind('click',function() {
+		
+			var page1 = $('#slider');
+			var page2 = $('#mapContainer');
+			var toHide = page1.is(':visible') ? page1 : page2;
+			var toShow = page2.is(':visible') ? page1 : page2;
+			
+			toHide.removeClass('flip in').addClass('flip out').hide();
+			toShow.removeClass('flip out').addClass('flip in').show();
+		});	
 
+//var isLoggedIn = getCookie('isLoggedIn');
+//console.log(isLoggedIn);
+		
+		
 
 
 </script>
+</div>
 
+<div data-role="page" id="login" data-theme="c">
+		<div id="logo">
+        <img src="images/makaan-logo.jpg"/>
+    </div>
+            <div data-role="content">
+                <form action="">
+				
 
+                    <div data-role="fieldcontain" class="ui-hide-label">
+                            <input name="" id="emailId" placeholder="Email Id" value="" required="required" type="email">
+                    </div>
+					<fieldset class="ui-grid-a">
+						<div class="ui-block-a"><input data-theme="c" value="Skip" type="button" id="ignoreLogin" onclick="$.mobile.changePage( '#search', { transition: 'slide'} );"></div>
+						<div class="ui-block-b"><input data-theme="b" value="Sign In" type="button" onclick="if(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test($('#emailId').val())){  $.mobile.changePage( '#search', { transition: 'slide'} ); globals.logged=true; return false;  }   else { $('#popupWrongEmail').popup('open'); }"></div>
+					</fieldset>
+                </form>
+				
+				
+            </div>
+            
+        </div>
+
+	<div data-role="popup" id="popupWrongEmail">
+		<p>Invalid Email.<p>
+	</div>	
+	
+	<div data-role="popup" id="popupNoProp">
+		<p>No properties found.<p>
+	</div>
+	<!--<div data-role="popup" id="popupWrongEmail" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
+			<div data-role="header" data-theme="a" class="ui-corner-top">
+				<h1>Alert</h1>
+			</div>
+			<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+				<h3 class="ui-title"></h3>
+				<p>Invalid Email.</p>
+				<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Ok</a>    
+				
+			</div>
+		</div>-->	
+		
+	<script type='text/javascript'>
+	$(function(){
+		$('#popupWrongEmail').popup();
+		$('#popupNoProp').popup();
+	});
+	</script>	
 </body>
+
+</html>

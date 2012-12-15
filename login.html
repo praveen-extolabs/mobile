@@ -1,0 +1,60 @@
+
+<link rel="stylesheet" href="css/jquery.mobile-1.2.0.min.css"/>
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.2.0.min.js"></script>
+	<script type="text/javascript" src="js/global.js"></script>
+    <script>
+	createCookie('isLoggedIn',false);
+	function handleSubmit(){
+		var emailId = $('#emailId').val();
+		var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+		if(emailId != "" && pattern.test(emailId)){
+			eraseCookie('isLoggedIn');
+			createCookie('isLoggedIn',true);
+			createCookie('emailId',emailId);
+			location = "index.html";
+		}
+		return false;
+	}
+	function handleIgnore(){
+		location = "index.html";
+	}
+	
+	</script>
+    
+    
+	<style type="text/css">
+    #logo {
+        width: 208px;
+        margin: auto;
+		margin-top: 20px;
+        margin-bottom: 20px;
+    }
+	</style>
+	
+	
+        <!-- Home -->
+        <div data-role="page" id="page1" data-theme="c">
+		<div id="logo">
+        <img src="images/makaan-logo.jpg"/>
+    </div>
+            <div data-role="content">
+                <form action="">
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup" data-mini="true">
+                            <input name="" id="emailId" placeholder="Email Id" value="" required="required" type="email">
+                        </fieldset>
+                    </div>
+					<fieldset class="ui-grid-a">
+						<div class="ui-block-a"><input data-theme="c" value="Skip" type="button" id="ignoreLogin" onclick="handleIgnore();"></div>
+						<div class="ui-block-b"><input data-theme="b" value="Sign In" type="submit" onclick="handleSubmit();"></div>
+					</fieldset>
+                </form>
+				
+				
+            </div>
+            
+        </div>
+        
+        
+     

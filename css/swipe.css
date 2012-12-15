@@ -3,7 +3,10 @@
   background:#23282C;
 }
   #slider {
-    
+    z-index:1000;
+  }
+  #mapContainer {
+    z-index:1000;
   }
   #slider li div {
     /*margin: 0 13px;
@@ -42,6 +45,20 @@
       margin-left:-75px;
       width:150px;
     }
+	.marker{
+		text-align:center;
+      font-size:27px;
+      line-height:1.3;
+      color:#697279;
+      display:block;
+      position:absolute;
+      top:3%;
+      left:95%;
+      margin-left:-75px;
+      width:150px;
+	  cursor:pointer;
+	  z-index:1001;
+	}
       #position em {
         display:inline-block;
         padding:0 3px;
@@ -188,7 +205,28 @@ p.copy {
   border-top:1px #DADDE0 solid
 }
 
+/* not important */
+.page1,.page2 {
+   padding: 10px;    
+}
+/* end */
 
+
+
+.page1 {
+    /*width: 300px;
+    height: 300px;
+    background: red;
+    position: relative;*/
+}
+
+.page2 {
+    /*width: 300px;
+    height: 300px;
+    background: blue;
+    position: relative;*/
+    display: none;
+}
 
 
 

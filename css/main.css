@@ -1,6 +1,6 @@
 body{
 -webkit-text-size-adjust:none;
-background: #5a5959 url(images/menuBg.gif) top left repeat-y !important;
+
 }
 .contentWrap{
 width:310px;
@@ -23,15 +23,24 @@ padding:15px 5px 0 5px;
 #rightmenu{
   width: 165px;
   height: 100%;
-  display: block !important;
+  display: none;
   float: right;
+  overflow: auto;
+    position: fixed;
+	right:0;
+  background: #5a5959 url(images/menuBg.gif) top left repeat-y !important;
 }
 #menu {
   width: 165px;
   height: 100%;
-  display: block !important;
+  display: none;
   float: left;
+   height: 100%;
+    overflow: auto;
+    position: fixed;
+  background: #5a5959 url(images/menuBg.gif) top left repeat-y !important;
 }
+.help-leftmenu{display:none}
 #rightmenu h3 , #menu h3{
 	font-family:arial;
 	font-size:12px;
@@ -80,7 +89,7 @@ li.active {
 	background-color:#fff;
 	line-height:18px;
 }
-
+#login .ui-content{padding-top:0px}
 li.active{
 	color:#fff;
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(30,29,29,1)), color-stop(21%,rgba(56,55,55,1)));
@@ -92,7 +101,7 @@ li.active{
 	border-radius: 0 !important;
 }
 
-.ui-field-contain, .ui-mobile fieldset.ui-field-contain{
+#list .ui-field-contain, #list  .ui-mobile fieldset.ui-field-contain{
 border-width: 0;
     margin: 0.2em 3em;
     padding: 0;
@@ -118,7 +127,7 @@ border-width: 0;
 .ui-icon-arrow-r {display:none}
 .title{ color:#1D95CB}
 .price{ 
- color: #E12182;
+ color: #F67B13;
     display: block;
     float: right;
     font-size: 126%;
@@ -130,3 +139,37 @@ border-width: 0;
 .ui-btn-up-c{
 background: -moz-linear-gradient(center top , #FCFCFC, #EDEDED) repeat scroll 0 0 transparent;
 }
+.ui-header {
+background : #DDDDDD;
+}
+.ui-header .ui-input-search {
+ border-top:0px;
+ border-left:0px;
+ border-right:0px;
+ border-bottom: 1px solid #0171A2;
+  background: #DDDDDD;
+box-shadow : none;  
+padding-left:0px;
+padding-right:0px;
+width:100%;
+}
+
+.ui-header .ui-icon-searchfield:after{
+ display:none;
+}
+
+.ui-header .ui-btn{
+	border: 0 ;
+	background:none;
+	padding: 5px 5px 2px;
+}
+
+.ui-header .showMenu{
+border-right: 1px solid #ADADAD;
+}
+
+.ui-header .showMenuFilter {
+border-left: 1px solid #ADADAD;
+}
+
+

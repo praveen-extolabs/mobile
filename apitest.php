@@ -1,20 +1,22 @@
 <?php
 
-header('Content-type: application/json');
+//header('Content-type: application/json');
 
 $getCityList = array('method'=>'getCityList');
 
 $getSubLocations = array('method'=>'getSubLocations','cityCode'=>"M6");
 
 
-$getPropList = array('method'=>'getPropList','makaanData'=>"searched=1&main=1&popactive=&property_for=2&property_type=3&city=M6&loc1=0&budget_from=&budget_to=&bedroom=1&min_area=&area_unit=Sq.Ft&price_persqft=&fur%5B%5D=&fur%5B%5D=Furnished&fur%5B%5D=Semi-furnished&fur%5B%5D=Unfurnished&pb%5B%5D=&pb%5B%5D=2&pb%5B%5D=1&pb%5B%5D=3&x=36&y=10");
+$getPropList = array('method'=>'getPropList','makaanData'=>"searched=1&main=1&popactive=&property_for=2&property_type=3&city=M4&loc1=0&budget_from=&budget_to=&bedroom=1&min_area=&area_unit=Sq.Ft&price_persqft=&fur%5B%5D=&fur%5B%5D=Furnished&fur%5B%5D=Semi-furnished&fur%5B%5D=Unfurnished&pb%5B%5D=&pb%5B%5D=2&pb%5B%5D=1&pb%5B%5D=3&x=36&y=10");
+
+$getPropList = array('method'=>'getPropList','makaanData'=>"	searched=1&main=1&popactive=&property_for=1&property_type=&city=S40&budget_from=500000&budget_to=3000000&bedroom=&min_area=&area_unit=Sq.Ft&price_persqft=&fur%5B%5D=&fur%5B%5D=Furnished&fur%5B%5D=Semi-furnished&fur%5B%5D=Unfurnished&pb%5B%5D=&pb%5B%5D=2&pb%5B%5D=1&pb%5B%5D=3&x=23&y=14");
 
 $getPropDetails = array('method'=>'getPropDetails','id'=>"aHR0cDovL3d3dy5tYWthYW4uY29tL3NlY3VuZGVyYWJhZC1wcm9wZXJ0eS95YXByYWwtcHJvcGVydHkvM2Joay1hcGFydG1lbnQtZm9yLXJlbnQtaW4teWFwcmFsLTIzOTUxNzgtMC0wL2Q0YmU4ZDlkN2ZhMGVmOGI2N2IzYWUzOTI3NDhjYmQ4LnBocA==");
 
-$data = $getPropDetails;
+$data = $getPropList;
 
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "http://localhost/makaan/data.php");
+curl_setopt($ch, CURLOPT_URL, "http://localhost/mak5/data.php");
 //curl_setopt($ch, CURLOPT_URL, "http://www.skyvue.com.au");
 //curl_setopt($ch, CURLOPT_HEADER, TRUE);
 //curl_setopt($ch, CURLOPT_NOBODY, TRUE); // remove body
