@@ -61,7 +61,7 @@ $('#list').replaceWith(globals.listhtmlObj);
 		$('#menu').show();
 		$(".ui-page-active").animate({
 			marginLeft: "0px",
-		  }, 300, function(){menuStatus = false;onSubLocMenuClose();$('#menu').hide();});
+		  }, 300, function(){menuStatus = false;onSubLocMenuClose();$('#menu').hide();$('.help-leftmenu').hide();});
 		  }
 		  //$('.help-leftmenu').hide();
 	/* if (!filterMenuStatus && !menuStatus){
@@ -120,8 +120,8 @@ $.mobile.loading( 'show', {
 
 globals.listhtmlObj = $('#list').clone();
  $.ajax({
-//  url: 'http://makaan.phpfogapp.com/data.php',
-  url: 'data.php',
+  url: 'http://makaan.whiteskylabs.com/data.php',
+  //url: 'data.php',
   type:"POST",
   data:{"method":"getPropList",'makaanData':postData},
   error:function(){
@@ -163,16 +163,16 @@ globals.listhtmlObj = $('#list').clone();
 	 var dataId = $(this).attr('data-id');
 	 var contact = $(this).attr('data-contact');
 	 $.ajax({
-	//  url: 'http://makaan.phpfogapp.com/data.php',
-	  url: 'data.php',
+	 url: 'http://makaan.whiteskylabs.com/data.php',
+	 // url: 'data.php',
 	  type:"POST",
 	  data:{"method":"getPropDetails",'id':dataId},
 	  success: function(data) {
 	  $.mobile.loading('hide');
 		//window.location.hash = '#detail';
 		$.mobile.changePage( "#detail", { transition: "slide"} );
-		//tabs.setup();
-		//slider.setup();
+		tabs.setup();
+		slider.setup();
 		//$('#mapContainer iframe').attr('src',data.map);
 		var mapData = data.map.split('?')[1].split('&');
 		var latitude = mapData[0].split('=')[1];
@@ -209,8 +209,8 @@ globals.listhtmlObj = $('#list').clone();
 
 
  $.ajax({
-//  url: 'http://makaan.phpfogapp.com/data.php',
-  url: 'data.php',
+   url: 'http://makaan.whiteskylabs.com/data.php',
+ // url: 'data.php',
   type:"POST",
   data:{"method":"getSubLocations",'cityCode':globals.city},
   error:function(){
@@ -264,8 +264,8 @@ var count = 0;
 });
 	//globals.listhtmlObj.attr('id','list1');
   $.ajax({
-//  url: 'http://makaan.phpfogapp.com/data.php',
-  url: 'data.php',
+ url: 'http://makaan.whiteskylabs.com/data.php',
+  //url: 'data.php',
   type:"POST",
   data:{"method":"getPropList",'makaanData':postData},
   error:function(){
