@@ -13,7 +13,7 @@ $(function(){
 $('#list .ui-input-search input').live("focus", function (){
 window.location.hash = '';
  
-$('#city').trigger('focus');
+$('#city').focus();
 setTimeout(function(){
 $('#list').replaceWith(globals.listhtmlObj);
 },1000)
@@ -63,7 +63,7 @@ $('#list').replaceWith(globals.listhtmlObj);
 			marginLeft: "0px",
 		  }, 300, function(){menuStatus = false;onSubLocMenuClose();$('#menu').hide();$('.help-leftmenu').hide();});
 		  }
-		  //$('.help-leftmenu').hide();
+		  
 	/* if (!filterMenuStatus && !menuStatus){
 	 
 		$(".ui-page-active").animate({
@@ -109,6 +109,7 @@ $('#list').replaceWith(globals.listhtmlObj);
 	});
 	
 $('#searchSubmit').click(function(){
+
 var finalHtml = '';
 var listHtml = '<li><a class="ui-link-inherit" href="detail.html"><div class="photo"><div class="img-thumb"><img src="css/images/thumb2.jpg" /></div></div><h3 class="title">Broken Bells</h3<p>Broken Bells</p><span class="price"> &#x20B9; 10000000</span><\/a><\/li>';
 var postData = 'searched=1&main=1&popactive=&property_for=1&property_type='+globals.property_type+'&city='+globals.city+'&budget_from='+(parseInt(globals.budget_from)*100000)+'&budget_to='+(parseInt(globals.budget_to)*100000)+'&bedroom='+globals.bedroom+'&min_area=&area_unit=Sq.Ft&price_persqft=&fur%5B%5D=&fur%5B%5D=Furnished&fur%5B%5D=Semi-furnished&fur%5B%5D=Unfurnished&pb%5B%5D=&pb%5B%5D=2&pb%5B%5D=1&pb%5B%5D=3&x=23&y=14';	
@@ -121,7 +122,7 @@ $.mobile.loading( 'show', {
 globals.listhtmlObj = $('#list').clone();
  $.ajax({
   url: 'http://makaan.whiteskylabs.com/data.php',
-  //url: 'data.php',
+ // url: 'data.php',
   type:"POST",
   data:{"method":"getPropList",'makaanData':postData},
   error:function(){
@@ -141,8 +142,8 @@ globals.listhtmlObj = $('#list').clone();
      // html += '<li><a href="detail.html"><div class="photo"><img src="css/images/thumb2.jpg" /><h3 class="title">Broken Bells</h3<p>Broken Bells</p></a></li>';
 	 html += '<li data-id="'+v.id+'" data-contact="'+v.contactname+'"><a href="javascript:void(0);" ><div class="photo"><img src="'+v.thumb+'" /></div><h3 class="title">'+v.title+'</h3><p style="font-wieght:normal;">'+v.teaser+'<!--<br><span class="beds" style="font-size:12px;">'+v.bedroom+'</span>--><span class="beds" style="font-size:12px;">'+v.amenites+'</span><span class="price" style="font-size:12px;">'+v.price+'</span></p></a></li>';
   });
-  //window.location.hash = '#list';
-  $.mobile.changePage( "#list", { transition: "slide"} );
+  window.location.hash = '#list';
+  //$.mobile.changePage( "#list", { transition: "fade"} );
    $('#list #listData').html('');
     $('#list #listData').html(html);
 	 
@@ -163,8 +164,8 @@ globals.listhtmlObj = $('#list').clone();
 	 var dataId = $(this).attr('data-id');
 	 var contact = $(this).attr('data-contact');
 	 $.ajax({
-	 url: 'http://makaan.whiteskylabs.com/data.php',
-	 // url: 'data.php',
+	url: 'http://makaan.whiteskylabs.com/data.php',
+ // url: 'data.php',
 	  type:"POST",
 	  data:{"method":"getPropDetails",'id':dataId},
 	  success: function(data) {
@@ -188,7 +189,8 @@ globals.listhtmlObj = $('#list').clone();
 		$('#pageMain').html(data.main);
 		$('#pageMore').html(data.more);
 		$('#pageDesc').html(data.desc);
-		
+		$('#pageContact').html(contact+", Mobile: <a href='tel:"+data.phone+"'>"+data.phone+"</a>");
+		/*
 		var isLoggedIn = readCookie('isLoggedIn');
 		if(isLoggedIn == "true"){
 			$('#pageContact').html(contact);
@@ -199,6 +201,7 @@ globals.listhtmlObj = $('#list').clone();
 		}
 		
 		$('#pageMap iframe').attr('src',data.map);
+		*/
 		
 		
 	  }
@@ -209,7 +212,7 @@ globals.listhtmlObj = $('#list').clone();
 
 
  $.ajax({
-   url: 'http://makaan.whiteskylabs.com/data.php',
+url: 'http://makaan.whiteskylabs.com/data.php',
  // url: 'data.php',
   type:"POST",
   data:{"method":"getSubLocations",'cityCode':globals.city},
@@ -264,15 +267,15 @@ var count = 0;
 });
 	//globals.listhtmlObj.attr('id','list1');
   $.ajax({
- url: 'http://makaan.whiteskylabs.com/data.php',
-  //url: 'data.php',
+url: 'http://makaan.whiteskylabs.com/data.php',
+ // url: 'data.php',
   type:"POST",
   data:{"method":"getPropList",'makaanData':postData},
   error:function(){
 		$.mobile.loading( 'hide');
   },
   success: function(data) {
-  
+  $("#menu li").removeClass('active');
   if(data.error && data.message=='Norecord') {
 	$('#list #listData').html(''); $.mobile.loading( 'hide'); $('#popupNoProp').popup('open');   return false;
   }
