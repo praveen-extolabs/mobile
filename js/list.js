@@ -12,7 +12,7 @@ globals = {
 $(function(){
 $('#list .ui-input-search input').live("focus", function (){
 window.location.hash = '';
- var t=setTimeout(function(){$('#city').focus();},300);
+ //var t=setTimeout(function(){$('#city').focus();},300);
 //$('#city').focus();
 setTimeout(function(){
 $('#list').replaceWith(globals.listhtmlObj);
@@ -142,7 +142,7 @@ globals.listhtmlObj = $('#list').clone();
      // html += '<li><a href="detail.html"><div class="photo"><img src="css/images/thumb2.jpg" /><h3 class="title">Broken Bells</h3<p>Broken Bells</p></a></li>';
 	 html += '<li data-id="'+v.id+'" data-contact="'+v.contactname+'"><a href="javascript:void(0);" ><div class="photo"><img src="'+v.thumb+'" /></div><h3 class="title">'+v.title+'</h3><p style="font-wieght:normal;">'+v.teaser+'<!--<br><span class="beds" style="font-size:12px;">'+v.bedroom+'</span>--><span class="beds" style="font-size:12px;">'+v.amenites+'</span><span class="price" style="font-size:12px;">'+v.price+'</span></p></a></li>';
   });
-  window.location.hash = '#list';
+  
   //$.mobile.changePage( "#list", { transition: "fade"} );
    $('#list #listData').html('');
     $('#list #listData').html(html);
@@ -150,6 +150,8 @@ globals.listhtmlObj = $('#list').clone();
 	if($('#list').hasClass('ui-page')){
 	$('#list #listData').listview('refresh');
 	}
+	
+	window.location.hash = '#list';
 	
   }
 });
