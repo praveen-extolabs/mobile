@@ -12,7 +12,7 @@ header('Content-type:application/json');
  
  //echo $cache_file = "cache2/".$input_code.".txt";
 
-if( file_exists($cache_file) ) { $html= file_get_contents($cache_file); if(empty($html) || $html=='null' ) {echo json_encode(array('error'=>true,'message'=>'Norecord'));} exit; }
+//if( file_exists($cache_file) ) { $html= file_get_contents($cache_file); if(empty($html) || $html=='null' ) {echo json_encode(array('error'=>true,'message'=>'Norecord'));} exit; }
 
 
 if($method=='getCityList') {
