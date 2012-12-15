@@ -12,8 +12,8 @@ globals = {
 $(function(){
 $('#list .ui-input-search input').live("focus", function (){
 window.location.hash = '';
- 
-$('#city').focus();
+ var t=setTimeout(function(){$('#city').focus();},300);
+//$('#city').focus();
 setTimeout(function(){
 $('#list').replaceWith(globals.listhtmlObj);
 },1000)
