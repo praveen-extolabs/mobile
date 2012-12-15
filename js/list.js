@@ -61,9 +61,9 @@ $('#list').replaceWith(globals.listhtmlObj);
 		$('#menu').show();
 		$(".ui-page-active").animate({
 			marginLeft: "0px",
-		  }, 300, function(){menuStatus = false;onSubLocMenuClose();$('#menu').hide();$('.help-leftmenu').hide();});
+		  }, 300, function(){menuStatus = false;onSubLocMenuClose();$('#menu').hide();});
 		  }
-		  
+		  //$('.help-leftmenu').hide();
 	/* if (!filterMenuStatus && !menuStatus){
 	 
 		$(".ui-page-active").animate({
@@ -171,8 +171,8 @@ globals.listhtmlObj = $('#list').clone();
 	  $.mobile.loading('hide');
 		//window.location.hash = '#detail';
 		$.mobile.changePage( "#detail", { transition: "slide"} );
-		tabs.setup();
-		slider.setup();
+		//tabs.setup();
+		//slider.setup();
 		//$('#mapContainer iframe').attr('src',data.map);
 		var mapData = data.map.split('?')[1].split('&');
 		var latitude = mapData[0].split('=')[1];
